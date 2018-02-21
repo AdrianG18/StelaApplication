@@ -77,6 +77,9 @@ public class ConstellationAdapter extends RecyclerView.Adapter<ConstellationAdap
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         // get the data according to position
         final Constellation constellation = mConstellations.get(position);
+        holder.tvName.setText(constellation.getName());
+        holder.tvDescription.setText(constellation.getDescription());
+
     }
 
     @Override
