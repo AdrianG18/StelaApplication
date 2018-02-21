@@ -10,7 +10,7 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:title="Home" />
         <item
-            android:id="@+id/nav_activity_add_recipe"
+            android:id="@+id/nav_configure"
             android:icon="@drawable/ic_add_to_photos_black_24dp"
             android:title="Add a Recipe" />
         <item
