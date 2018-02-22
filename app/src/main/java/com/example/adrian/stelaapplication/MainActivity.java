@@ -65,6 +65,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // close the navigation view
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
+            case R.id.nav_move:
+                // Go to MoveActivity
+                startActivity(new Intent(getApplicationContext(), MoveActivity.class));
+                // set the transition
+                overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
             default:
                 // close the navigation view
                 drawerLayout.closeDrawer(GravityCompat.START);

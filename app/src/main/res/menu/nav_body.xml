@@ -18,7 +18,7 @@
             android:icon="@drawable/ic_search"
             android:title="Search" />
         <item
-            android:id="@+id/nav_find_friends"
+            android:id="@+id/nav_move"
             android:icon="@drawable/ic_friends"
             android:title="Find Friends" />
         <item
