@@ -54,17 +54,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setItemTextColor(null);
     }
 
-
-
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        // Handle navigation view item clicks here.
-        if (drawer == null) {
-            System.out.println("THE FREAKING DRAWER LAYOUT IS NULL");
-        }
         int id = item.getItemId();
         switch(id) {
             case R.id.nav_configure:
@@ -72,11 +63,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // set the new animation
                 overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
                 // close the navigation view
-                drawer.closeDrawer(GravityCompat.START);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             default:
                 // close the navigation view
-                drawer.closeDrawer(GravityCompat.START);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
         }
     }

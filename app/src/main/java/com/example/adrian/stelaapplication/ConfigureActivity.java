@@ -1,5 +1,6 @@
 package com.example.adrian.stelaapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -49,10 +50,17 @@ public class ConfigureActivity extends AppCompatActivity {
         // configure the Telescope
         if (!clicked) {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            buttonConfigure.setText("Back");
             clicked = true;
         }
         else {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.white));
+            // Go back to the Main activity
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            // set the transition
+            overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+
+
             clicked = false;
         }
     }

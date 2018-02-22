@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ConfigureActivity" />
+        <activity android:name=".MoveActivity"></activity>
     </application>
 
 </manifest>
