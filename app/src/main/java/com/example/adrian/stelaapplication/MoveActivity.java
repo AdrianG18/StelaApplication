@@ -1,15 +1,25 @@
 package com.example.adrian.stelaapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.AsyncHttpClient;
+
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cz.msebera.android.httpclient.Header;
 
 
 // TODO: get the StelaClient to work right and then initialize this client
@@ -19,7 +29,9 @@ import butterknife.ButterKnife;
 public class MoveActivity extends AppCompatActivity {
 
 
+    AsyncHttpClient tempClient = new AsyncHttpClient();
     StelaClient client;
+//    Context context = getApplicationContext();
 
     @BindView(R.id.xText) EditText xText;
     @BindView(R.id.yText) EditText yText;
@@ -33,7 +45,7 @@ public class MoveActivity extends AppCompatActivity {
         // Bind the layout items with ButterKnife
         ButterKnife.bind(this);
 
-//         client = new StelaClient(getApplicationContext());
+        client = new StelaClient(tempClient);
     }
 
 //    public boolean verifyMove(View v) {
@@ -44,35 +56,35 @@ public class MoveActivity extends AppCompatActivity {
 //
 //    }
 
-//  public void errorPopup() {
-//        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-//        builder1.setMessage("Write your message here.");
-//        builder1.setCancelable(true);
-//
-//        builder1.setPositiveButton(
-//                "Yes",
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        dialog.cancel();
-//                    }
-//                });
-//
-//        builder1.setNegativeButton(
-//                "No",
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        dialog.cancel();
-//                    }
-//                });
-//
-//        AlertDialog alert11 = builder1.create();
-//        alert11.show();
-//
-//
-//    }
+  public void errorPopup() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(getApplicationContext());
+        builder1.setMessage("Enter Valid Numbers");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
 
 
-    public void onMove(View v) {
+    }
+
+
+    public void onMoooooove(View v) {
         // get the coordinates from the number values they input
         String s1 = xText.getText().toString();
         String s2 = yText.getText().toString();
@@ -80,6 +92,7 @@ public class MoveActivity extends AppCompatActivity {
         if (s1.isEmpty()) {
             // print some error message popup thing
             Log.d("Null Pointer", "X-Coordinate must have a value");
+            errorPopup();
             return;
         }
         if (s2.isEmpty()) {
@@ -101,26 +114,45 @@ public class MoveActivity extends AppCompatActivity {
         System.out.println("X: " + coords[0]);
         System.out.println("Y: " + coords[1]);
 
+        if (client == null) {
+            System.out.println("THE CLIENT IS NULL");
+        }
 
-//        client.sendMovement(coords, new JsonHttpResponseHandler() {
-//
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                super.onSuccess(statusCode, headers, response);
+        client.sendMovement(coords, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
                 // Go back to the Main activity
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 // set the transition
                 overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 //                super.onFailure(statusCode, headers, responseString, throwable);
-//            }
-
-
-//        });
-
+                Log.d("MoveFailure", responseString);
+                throwable.printStackTrace();
+            }
+        });
 
     }
+
+    public void onMove(View v) {
+        client.getCoordinates(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                Log.d("GROOVE SUCCESS!!!!!!!!!", "oh yeah");
+                System.out.println("IT FREAKING WORKED");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.d("GrooveFailure", responseString);
+                throwable.printStackTrace();
+            }
+        });
+    }
 }
+
