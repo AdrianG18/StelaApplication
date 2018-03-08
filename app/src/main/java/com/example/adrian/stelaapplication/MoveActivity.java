@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.adrian.stelaapplication.Models.tempStar;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.BindView;
@@ -143,6 +145,13 @@ public class MoveActivity extends AppCompatActivity {
 //                super.onSuccess(statusCode, headers, response);
                 Log.d("GROOVE SUCCESS!!!!!!!!!", "oh yeah");
                 System.out.println("IT FREAKING WORKED");
+                try {
+                    tempStar star = tempStar.fromJSON(response);
+                    star.printtoString();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
 
 
