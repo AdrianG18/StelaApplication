@@ -10,11 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import butterknife.BindView;
@@ -141,10 +139,12 @@ public class MoveActivity extends AppCompatActivity {
     public void onMove(View v) {
         client.getCoordinates(new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                super.onSuccess(statusCode, headers, response);
                 Log.d("GROOVE SUCCESS!!!!!!!!!", "oh yeah");
                 System.out.println("IT FREAKING WORKED");
             }
+
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
