@@ -9,8 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-
-import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -27,12 +25,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
-//    @BindView(R.id.rvConstellation) RecyclerView rvConstellation;
+    @BindView(R.id.rvConstellation) RecyclerView rvConstellation;
     public static ArrayList<Constellation> constellations;
     ConstellationAdapter constellationAdapter;
     ConstellationAdapter.ConstellationAdapterListener constellationAdapterListener;
     private int position;
-    RecyclerView rvConstellation;
+//    RecyclerView rvConstellation;
 
 
     @Override
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-        rvConstellation = (RecyclerView) findViewById(R.id.rvConstellation);
+//        rvConstellation = (RecyclerView) findViewById(R.id.rvConstellation);
 
         // init the arraylist (data source)
         constellations = new ArrayList<>();
