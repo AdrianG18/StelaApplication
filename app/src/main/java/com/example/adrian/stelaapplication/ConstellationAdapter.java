@@ -31,6 +31,10 @@ public class ConstellationAdapter extends RecyclerView.Adapter<ConstellationAdap
         mListener = listener;
     }
 
+    public ConstellationAdapter(List<Constellation> constellations) {
+        mConstellations = constellations;
+    }
+
     // create a ViewHolder class
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivImage;

@@ -1,37 +1,34 @@
 package com.example.adrian.stelaapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-//import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+//import org.parceler.Parcels;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
-    @BindView(R.id.rvConstellation) RecyclerView rvConstellation;
-    public static List<Constellation> constellations;
+//    @BindView(R.id.rvConstellation) RecyclerView rvConstellation;
+    public static ArrayList<Constellation> constellations;
     ConstellationAdapter constellationAdapter;
     ConstellationAdapter.ConstellationAdapterListener constellationAdapterListener;
     private int position;
+    RecyclerView rvConstellation;
 
 
     @Override
@@ -40,25 +37,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+        rvConstellation = (RecyclerView) findViewById(R.id.rvConstellation);
 
-        //init the array list (data)
-        constellations = new ArrayList<Constellation>(){
-            public boolean add(Constellation constellation){
-                int index = Collections.binarySearch(this,constellation);
-                if(index<0) index = ~index;
-                super.add(index,constellation);
-                return true;
-            }
-        };
-        // construct the adapter listener
-        constellationAdapterListener = new ConstellationAdapter.ConstellationAdapterListener(){
-            @Override
-            public void onItemSelected(View view, int position, boolean b) {
-//                Intent i = new Intent(MainActivity.this, ConstellationActivity.class);
-//                i.putExtra("constellation", Parcels.wrap(constellations.get(position)));
-//                startActivity(i);
-            }
-        };
+        // init the arraylist (data source)
+        constellations = new ArrayList<>();
+
+        // construct the adapter from this data source
+        constellationAdapter = new ConstellationAdapter(constellations);
+
+        // RecyclerView setup (layout manager, use adapter)
+        rvConstellation.setLayoutManager(new LinearLayoutManager(this));
+
+        // set the adapter
+        rvConstellation.setAdapter(constellationAdapter);
+
+
+
+
+//        //init the array list (data)
+//        constellations = new ArrayList<Constellation>(){
+//            public boolean add(Constellation constellation){
+//                int index = Collections.binarySearch(this,constellation);
+//                if(index<0) index = ~index;
+//                super.add(index,constellation);
+//                return true;
+//            }
+//        };
+//        // construct the adapter listener
+//        constellationAdapterListener = new ConstellationAdapter.ConstellationAdapterListener(){
+//            @Override
+//            public void onItemSelected(View view, int position, boolean b) {
+////                Intent i = new Intent(MainActivity.this, ConstellationActivity.class);
+////                i.putExtra("constellation", Parcels.wrap(constellations.get(position)));
+////                startActivity(i);
+//            }
+//        };
 
         setNavigationView();
 
@@ -81,10 +94,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 "near the center of the Milky Way");
 
         constellations.add(cons0);
+        constellationAdapter.notifyItemInserted(0);
         constellations.add(cons1);
+        constellationAdapter.notifyItemInserted(0);
         constellations.add(cons2);
-        constellationAdapter = new ConstellationAdapter(constellations,constellationAdapterListener);
-        rvConstellation.setAdapter(constellationAdapter);
+        constellationAdapter.notifyItemInserted(0);
+//        constellationAdapter = new ConstellationAdapter(constellations,constellationAdapterListener);
+//        rvConstellation.setAdapter(constellationAdapter);
 
     }
 
