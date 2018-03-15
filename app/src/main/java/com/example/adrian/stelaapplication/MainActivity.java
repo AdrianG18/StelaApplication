@@ -1,8 +1,10 @@
 package com.example.adrian.stelaapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            }
 //        };
 
+
+
         setNavigationView();
 
         // MAKE CONSTELLATION DATA ************************************************* //
@@ -136,11 +140,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setItemTextColor(null);
     }
 
-
-
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+        int id = item.getItemId();
+        switch(id) {
+            case R.id.nav_configure:
+                startActivity(new Intent(getApplicationContext(), ConfigureActivity.class));
+                // set the new animation
+                overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
+                // close the navigation view
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.nav_move:
+                // Go to MoveActivity
+                startActivity(new Intent(getApplicationContext(), MoveActivity.class));
+                // set the transition
+                overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
+            default:
+                // close the navigation view
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+        }
     }
 }
