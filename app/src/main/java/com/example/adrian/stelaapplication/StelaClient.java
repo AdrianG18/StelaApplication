@@ -17,7 +17,7 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
     public AsyncHttpClient client;
 
 //    public static final String REST_URL= "http://127.0.0.1:5000/";
-    public static final String REST_URL="http://e296b252.ngrok.io/";
+    public static final String REST_URL="http://8968a615.ngrok.io";
 
     public static final BaseApi REST_API_INSTANCE = null; // Change this
    // public static final String REST_URL = "https://api.twitter.com/1.1"; // Change this, base API URL
@@ -73,7 +73,7 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
      * Method to send a movement request to the Stela Server
      */
     public void getCoordinates(AsyncHttpResponseHandler handler) {
-        String apiUrl = REST_URL + "coordinates";
+        String apiUrl = REST_URL + "/coordinates";
 
         RequestParams params = new RequestParams();
 //        params.put("pandrews", coords);
