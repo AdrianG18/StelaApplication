@@ -18,8 +18,13 @@ import butterknife.ButterKnife;
 public class ConfigureActivity extends AppCompatActivity {
 
     public boolean clicked = false;
+    public int setCount = 0;
 
-    @BindView(R.id.button_configure) Button buttonConfigure;
+    @BindView(R.id.button_point) Button buttonPoint;
+    @BindView(R.id.button_up) Button buttonUp;
+    @BindView(R.id.button_left) Button buttonLeft;
+    @BindView(R.id.button_right) Button buttonRight;
+    @BindView(R.id.button_down) Button buttonDown;
     @BindView(R.id.linear_layout) LinearLayout linearLayout;
 
     @Override
@@ -30,27 +35,79 @@ public class ConfigureActivity extends AppCompatActivity {
         // Bind the layout items with ButterKnife
         ButterKnife.bind(this);
 
-        // set the Button up
-        setButton();
+//        // set the Button up
+//        setButton();
     }
 
-    public void setButton() {
-        buttonConfigure.setOnClickListener(new View.OnClickListener() {
+//    public void setButton() {
+//        buttonUp.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                // call configure
+//                configure();
+//
+//            }
+//        });
+//    }
 
-            @Override
-            public void onClick(View view) {
-                // call configure
-                configure();
 
-            }
-        });
+    public void setPoint(View view) {
+        // send a POST request to the server to set this as the first point
+
+        if (setCount == 0) {
+            // once you implement the server request then there will be a delay
+                // so set the button to say loading or something
+                // also set the button as unclickable for the time being
+                // maybe lighten it up to make it seem unclickable at least
+
+            // server request
+            // on success
+                setCount++;
+                buttonPoint.setText("Set Second Point");
+        }
+        else if (setCount == 1) {
+            // once you implement the server request then there will be a delay
+            // so set the button to say loading or something
+            // also set the button as unclickable for the time being
+            // maybe lighten it up to make it seem unclickable at least
+
+            // server request
+            // on success
+            setCount++;
+            buttonPoint.setText("Set Third Point");
+        }
+
+        else if (setCount == 2) {
+            // once you implement the server request then there will be a delay
+            // so set the button to say loading or something
+            // also set the button as unclickable for the time being
+            // maybe lighten it up to make it seem unclickable at least
+
+            // server request
+            // on success
+            setCount++;
+            buttonPoint.setText("Finish");
+        }
+        else if (setCount == 3) {
+            setCount = 0;
+
+            // Go back to the Main activity
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            // set the transition
+            overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+        }
     }
 
-    public void configure() {
+    public void up(View view) {
+        // move up
+
+        //all this is the old code to test the activity
+
         // configure the Telescope
         if (!clicked) {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-            buttonConfigure.setText("Back");
+            buttonUp.setText("Back");
             clicked = true;
         }
         else {
@@ -63,5 +120,17 @@ public class ConfigureActivity extends AppCompatActivity {
 
             clicked = false;
         }
+    }
+
+    public void left(View view) {
+        // move left
+    }
+
+    public void right(View view) {
+        // move right
+    }
+
+    public void down(View view) {
+        // move down
     }
 }
