@@ -134,8 +134,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // set the navigation view
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setItemIconTintList(null);
-        navigationView.setItemTextColor(null);
+//        navigationView.setItemIconTintList(null);
+//        navigationView.setItemTextColor(null);
     }
 
     @Override
