@@ -23,9 +23,17 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    public boolean configured = false;
 
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.rvConstellation) RecyclerView rvConstellation;
+    @BindView(R.id.nav_view) NavigationView navigationView;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+//    @BindView(R.id.nav_home) Button buttonHome;
+//    @BindView(R.id.nav_configure) Button buttonConfigure;
+//    @BindView(R.id.nav_move) Button buttonMove;
+
+
     public static ArrayList<Constellation> constellations;
     ConstellationAdapter constellationAdapter;
     ConstellationAdapter.ConstellationAdapterListener constellationAdapterListener;
@@ -114,28 +122,69 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        rvConstellation.setLayoutManager(linearLayoutManager);
 //        rvConstellation.setAdapter(constellationAdapter);
 
+        configure();
 
     }
+
+    public void configure() {
+
+        if (getIntent().getExtras() != null) {
+            Bundle b = getIntent().getExtras();
+            configured = b.getBoolean("configured");
+        }
+        if (!configured) {
+            startActivity(new Intent(getApplicationContext(), ConfigureActivity.class));
+            // set the new animation
+            overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
+            // close the navigation view
+            drawerLayout.closeDrawer(GravityCompat.START);
+            configured = true;
+        }
+    }
+
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+//        menuInflater.inflate(R.menu.nav_body, menu);
+//        super.onCreateOptionsMenu(menu);
+//
+//        MenuItem dHome = menu.findItem(R.id.nav_home);
+//        MenuItem dCofigure = menu.findItem(R.id.nav_configure);
+//        MenuItem dMove = menu.findItem(R.id.nav_move);
+//
+//        dHome.getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+//        dCofigure.getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP );
+//        dMove.getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+//
+//    }
 
     public void setNavigationView() {
         // set up the navigation view
 
         // set the toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+      //  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
       //  setSupportActionBar(toolbar);
      //   getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // set the drawer layout and button to access it
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+     //   DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
         // set the navigation view
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+      //  NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-//        navigationView.setItemIconTintList(null);
-//        navigationView.setItemTextColor(null);
+        navigationView.setItemIconTintList(null);
+        navigationView.setItemTextColor(null);
+
+//        Menu navBody = navigationView.getMenu();
+//        MenuInflater menuInflater = getMenuInflater();
+//
+//        onCreateOptionsMenu(navBody, menuInflater);
+
+//        buttonHome.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//        buttonConfigure.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//        buttonMove.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
     }
 
     @Override
@@ -143,7 +192,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         switch(id) {
             case R.id.nav_configure:
-                startActivity(new Intent(getApplicationContext(), ConfigureActivity.class));
+                Intent i = new Intent(getApplicationContext(), ConfigureActivity.class);
+                // put the boolean extra
+                Bundle b = new Bundle();
+                b.putBoolean("complete", true);
+                i.putExtras(b);
+                // Start the Activity
+                startActivity(i);
                 // set the new animation
                 overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
                 // close the navigation view

@@ -4,14 +4,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/night"
     android:id="@+id/linear_layout">
 
-    <Button
-        android:id="@+id/button_configure"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/et_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/redText"
+            android:textColorHint="@color/buttonGrey"
+            android:backgroundTint="@color/buttonGrey"
+            android:hint="Enter Name Here"/>
+
+        <Button
+            android:id="@+id/button_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="setPoint"
+            android:backgroundTint="@color/buttonGrey"
+            android:textColor="@color/redText"
+            android:text="Set First Point" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:text="Configure"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="216dp" />
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/button_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/buttonGrey"
+            android:textColor="@color/redText"
+            android:onClick="up"
+            android:text="Up" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/button_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/buttonGrey"
+            android:textColor="@color/redText"
+            android:onClick="left"
+            android:text="Left" />
+
+        <Button
+            android:id="@+id/button_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:backgroundTint="@color/buttonGrey"
+            android:textColor="@color/redText"
+            android:onClick="right"
+            android:text="Right" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/button_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/buttonGrey"
+            android:textColor="@color/redText"
+            android:onClick="down"
+            android:text="Down" />
+
+    </LinearLayout>
+
+
 </LinearLayout>
