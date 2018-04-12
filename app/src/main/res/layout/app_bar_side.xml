@@ -15,7 +15,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/background2"
+            android:background="@drawable/background3"
             app:popupTheme="@style/AppTheme.PopupOverlay" >
 
             <TextView

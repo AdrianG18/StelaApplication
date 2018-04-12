@@ -17,8 +17,9 @@ import butterknife.ButterKnife;
 
 public class ConfigureActivity extends AppCompatActivity {
 
-    public boolean clicked = false;
+//    public boolean clicked = false;
     public int setCount = 0;
+    public boolean complete = false;
 
     @BindView(R.id.button_point) Button buttonPoint;
     @BindView(R.id.button_up) Button buttonUp;
@@ -37,6 +38,7 @@ public class ConfigureActivity extends AppCompatActivity {
 
 //        // set the Button up
 //        setButton();
+        complete();
     }
 
 //    public void setButton() {
@@ -51,6 +53,12 @@ public class ConfigureActivity extends AppCompatActivity {
 //        });
 //    }
 
+    public void complete() {
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+            complete = b.getBoolean("complete");
+        }
+    }
 
     public void setPoint(View view) {
         // send a POST request to the server to set this as the first point
@@ -65,6 +73,7 @@ public class ConfigureActivity extends AppCompatActivity {
             // on success
                 setCount++;
                 buttonPoint.setText("Set Second Point");
+                complete = false;
         }
         else if (setCount == 1) {
             // once you implement the server request then there will be a delay
@@ -91,9 +100,16 @@ public class ConfigureActivity extends AppCompatActivity {
         }
         else if (setCount == 3) {
             setCount = 0;
+            complete = true;
 
-            // Go back to the Main activity
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            // make an intent to go back to main Activity
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            // put the boolean extra
+            Bundle b = new Bundle();
+            b.putBoolean("configured", true);
+            i.putExtras(b);
+            // Start the Activity
+            startActivity(i);
             // set the transition
             overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
         }
@@ -105,21 +121,21 @@ public class ConfigureActivity extends AppCompatActivity {
         //all this is the old code to test the activity
 
         // configure the Telescope
-        if (!clicked) {
-            linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-            buttonUp.setText("Back");
-            clicked = true;
-        }
-        else {
-            linearLayout.setBackgroundColor(getResources().getColor(R.color.white));
-            // Go back to the Main activity
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            // set the transition
-            overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
-
-
-            clicked = false;
-        }
+//        if (!clicked) {
+//            linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//            buttonUp.setText("Back");
+//            clicked = true;
+//        }
+//        else {
+//            linearLayout.setBackgroundColor(getResources().getColor(R.color.white));
+//            // Go back to the Main activity
+//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//            // set the transition
+//            overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+//
+//
+//            clicked = false;
+//        }
     }
 
     public void left(View view) {
@@ -132,5 +148,12 @@ public class ConfigureActivity extends AppCompatActivity {
 
     public void down(View view) {
         // move down
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (complete) {
+            super.onBackPressed();
+        }
     }
 }

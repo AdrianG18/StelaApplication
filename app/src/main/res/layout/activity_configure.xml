@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/night"
     android:id="@+id/linear_layout">
 
     <LinearLayout
@@ -17,6 +18,9 @@
             android:id="@+id/et_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/redText"
+            android:textColorHint="@color/buttonGrey"
+            android:backgroundTint="@color/buttonGrey"
             android:hint="Enter Name Here"/>
 
         <Button
@@ -24,6 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="setPoint"
+            android:backgroundTint="@color/buttonGrey"
+            android:textColor="@color/redText"
             android:text="Set First Point" />
 
     </LinearLayout>
@@ -37,6 +43,8 @@
             android:id="@+id/button_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/buttonGrey"
+            android:textColor="@color/redText"
             android:onClick="up"
             android:text="Up" />
 
@@ -51,6 +59,8 @@
             android:id="@+id/button_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/buttonGrey"
+            android:textColor="@color/redText"
             android:onClick="left"
             android:text="Left" />
 
@@ -59,6 +69,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
+            android:backgroundTint="@color/buttonGrey"
+            android:textColor="@color/redText"
             android:onClick="right"
             android:text="Right" />
 
@@ -74,6 +86,8 @@
             android:id="@+id/button_down"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/buttonGrey"
+            android:textColor="@color/redText"
             android:onClick="down"
             android:text="Down" />
 

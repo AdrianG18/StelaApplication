@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_nav"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -8,10 +9,12 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_24dp"
+            android:iconTint="@color/redText"
             android:title="Home" />
         <item
             android:id="@+id/nav_configure"
             android:icon="@drawable/ic_add_to_photos_black_24dp"
+            android:iconTint="@color/redText"
             android:title="Configure" />
         <!--<item-->
             <!--android:id="@+id/nav_search"-->
@@ -20,7 +23,8 @@
         <item
             android:id="@+id/nav_move"
             android:icon="@drawable/ic_friends"
-            android:title="Move" />
+            android:title="Move"
+            android:iconTint="@color/redText"/>
         <!--<item-->
             <!--android:id="@+id/nav_help"-->
             <!--android:icon="@drawable/ic_help"-->

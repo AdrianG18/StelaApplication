@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/night"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -21,6 +22,7 @@
         android:layout_alignTop="@+id/ivImage"
         android:layout_toEndOf="@+id/ivImage"
         android:text="Constellation Name"
+        android:textColor="@color/redText"
         android:textSize="18sp" />
 
     <TextView
@@ -29,5 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvName"
         android:layout_toEndOf="@+id/ivImage"
-        android:text="Short Description or Fact" />
+        android:text="Short Description or Fact"
+        android:textColor="@color/redText"/>
 </RelativeLayout>
