@@ -13,7 +13,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -121,6 +123,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 //        rvConstellation.setLayoutManager(linearLayoutManager);
 //        rvConstellation.setAdapter(constellationAdapter);
+
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+
 
         configure();
 

@@ -9,8 +9,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONObject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by parkerandrews on 2/15/18.
@@ -20,6 +26,9 @@ public class ConfigureActivity extends AppCompatActivity {
     /* We want to pull a JSON that contains three coordinates
        Display those one by one
      */
+
+    AsyncHttpClient tempClient = new AsyncHttpClient();
+    StelaClient client;
 
 
 
@@ -46,6 +55,8 @@ public class ConfigureActivity extends AppCompatActivity {
 //        // set the Button up
 //        setButton();
         complete();
+
+        client = new StelaClient(tempClient);
     }
 
 //    public void setButton() {
@@ -76,12 +87,25 @@ public class ConfigureActivity extends AppCompatActivity {
                 // also set the button as unclickable for the time being
                 // maybe lighten it up to make it seem unclickable at least
 
-            // server request
-            // on success
-                setCount++;
-                buttonPoint.setText("Set Second Point");
-                tvCoordinate.setText("Coordinate 2");
-                complete = false;
+            client.setCalib(new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    // on success
+                    setCount++;
+                    buttonPoint.setText("Set Second Point");
+                    tvCoordinate.setText("Coordinate 2");
+                    complete = false;
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                }
+
+                // server request
+
+            });
+
         }
         else if (setCount == 1) {
             // once you implement the server request then there will be a delay
@@ -90,10 +114,22 @@ public class ConfigureActivity extends AppCompatActivity {
             // maybe lighten it up to make it seem unclickable at least
 
             // server request
-            // on success
-            setCount++;
-            buttonPoint.setText("Set Third Point");
-            tvCoordinate.setText("Coordinate 3");
+            client.setCalib(new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    // on success
+                    setCount++;
+                    buttonPoint.setText("Set Third Point");
+                    tvCoordinate.setText("Coordinate 3");
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                }
+
+            });
+
         }
 
         else if (setCount == 2) {
@@ -103,24 +139,48 @@ public class ConfigureActivity extends AppCompatActivity {
             // maybe lighten it up to make it seem unclickable at least
 
             // server request
-            // on success
-            setCount++;
-            buttonPoint.setText("Finish");
+            // server request
+            client.setCalib(new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    // on success
+                    setCount++;
+                    buttonPoint.setText("Finish");
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                }
+            });
+
         }
         else if (setCount == 3) {
-            setCount = 0;
-            complete = true;
 
-            // make an intent to go back to main Activity
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            // put the boolean extra
-            Bundle b = new Bundle();
-            b.putBoolean("configured", true);
-            i.putExtras(b);
-            // Start the Activity
-            startActivity(i);
-            // set the transition
-            overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+
+            client.finishCalib(new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    setCount = 0;
+                    complete = true;
+
+                    // make an intent to go back to main Activity
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    // put the boolean extra
+                    Bundle b = new Bundle();
+                    b.putBoolean("configured", true);
+                    i.putExtras(b);
+                    // Start the Activity
+                    startActivity(i);
+                    // set the transition
+                    overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                }
+            });
         }
     }
 
