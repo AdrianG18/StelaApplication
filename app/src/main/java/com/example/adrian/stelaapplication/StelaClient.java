@@ -17,7 +17,7 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
     public AsyncHttpClient client;
 
 //    public static final String REST_URL= "http://127.0.0.1:5000/";
-    public static final String REST_URL="http://8968a615.ngrok.io";
+    public static final String REST_URL="192.168.0.102:5123/";
 
     public static final BaseApi REST_API_INSTANCE = null; // Change this
    // public static final String REST_URL = "https://api.twitter.com/1.1"; // Change this, base API URL
@@ -60,7 +60,7 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
      * Method to send a movement request to the Stela Server
      */
     public void sendMovement(double[] coords, AsyncHttpResponseHandler handler) {
-        String apiUrl = REST_URL + "/coordinates";
+        String apiUrl = REST_URL + "coordinates";
 
         RequestParams params = new RequestParams();
         params.put("pandrews", coords);
@@ -73,7 +73,7 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
      * Method to send a movement request to the Stela Server
      */
     public void getCoordinates(AsyncHttpResponseHandler handler) {
-        String apiUrl = REST_URL + "/coordinates";
+        String apiUrl = REST_URL + "coordinates";
 
         RequestParams params = new RequestParams();
 //        params.put("pandrews", coords);
@@ -85,10 +85,30 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
     /**
      * Method to send first Configuration Point
      */
-    public void postCoordinate1(AsyncHttpResponseHandler handler) {
-        String apiUrl = REST_URL + "/setup";
+    public void setCalib(AsyncHttpResponseHandler handler) {
+        String apiUrl = REST_URL + "set_";
+        client.post(apiUrl, handler);
+    }
 
-        client.post(apiUrl,handler);
+    /**
+     * Method to begin Calibration Setup
+     */
+    public void setup(String time, AsyncHttpResponseHandler handler) {
+        String apiUrl = REST_URL + "setup";
+
+        RequestParams params = new RequestParams();
+        params.put("time", time);
+        System.out.println(time);
+
+        client.post(apiUrl, params, handler);
+    }
+
+    /**
+     * Method to send first Configuration Point
+     */
+    public void finishCalib(AsyncHttpResponseHandler handler) {
+        String apiUrl = REST_URL + "calibrate";
+        client.post(apiUrl, handler);
     }
 
 }
