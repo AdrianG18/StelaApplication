@@ -72,16 +72,16 @@ public class ConfigureActivity extends AppCompatActivity {
         String pattern = "yyyy-MM-dd-HH-mm-ss-SSS";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         myTime = simpleDateFormat.format(Calendar.getInstance().getTime());
-//        client.setup(myTime, new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                try {
-//                    coords = response.getJSONArray("calib_coors");
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
+        client.setup(myTime, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    coords = response.getJSONArray("calib_coors");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 //        // set the Button up
 //        setButton();
         complete();
