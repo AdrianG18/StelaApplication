@@ -14,14 +14,15 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <EditText
-            android:id="@+id/et_Name"
+        <TextView
+            android:id="@+id/tv_Coordinate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/buttonGrey"
+            android:text="COORDINATE 1"
             android:textColor="@color/redText"
             android:textColorHint="@color/buttonGrey"
-            android:backgroundTint="@color/buttonGrey"
-            android:hint="Enter Name Here"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/button_point"

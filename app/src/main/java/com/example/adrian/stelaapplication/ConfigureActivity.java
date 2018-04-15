@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,6 +17,11 @@ import butterknife.ButterKnife;
  */
 
 public class ConfigureActivity extends AppCompatActivity {
+    /* We want to pull a JSON that contains three coordinates
+       Display those one by one
+     */
+
+
 
 //    public boolean clicked = false;
     public int setCount = 0;
@@ -27,6 +33,7 @@ public class ConfigureActivity extends AppCompatActivity {
     @BindView(R.id.button_right) Button buttonRight;
     @BindView(R.id.button_down) Button buttonDown;
     @BindView(R.id.linear_layout) LinearLayout linearLayout;
+    @BindView(R.id.tv_Coordinate) TextView tvCoordinate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,6 +80,7 @@ public class ConfigureActivity extends AppCompatActivity {
             // on success
                 setCount++;
                 buttonPoint.setText("Set Second Point");
+                tvCoordinate.setText("Coordinate 2");
                 complete = false;
         }
         else if (setCount == 1) {
@@ -85,6 +93,7 @@ public class ConfigureActivity extends AppCompatActivity {
             // on success
             setCount++;
             buttonPoint.setText("Set Third Point");
+            tvCoordinate.setText("Coordinate 3");
         }
 
         else if (setCount == 2) {
