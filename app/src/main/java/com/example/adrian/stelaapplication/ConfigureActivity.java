@@ -57,6 +57,8 @@ public class ConfigureActivity extends AppCompatActivity {
         complete();
 
         client = new StelaClient(tempClient);
+
+        
     }
 
 //    public void setButton() {
