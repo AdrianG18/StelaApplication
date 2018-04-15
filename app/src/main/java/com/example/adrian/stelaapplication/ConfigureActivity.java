@@ -8,11 +8,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by parkerandrews on 2/15/18.
@@ -22,6 +30,7 @@ public class ConfigureActivity extends AppCompatActivity {
 
     public boolean clicked = false;
     public String myTime;
+    public JSONArray coords;
 
     @BindView(R.id.button_configure) Button buttonConfigure;
     @BindView(R.id.linear_layout) LinearLayout linearLayout;
@@ -40,7 +49,17 @@ public class ConfigureActivity extends AppCompatActivity {
         // get Time
         String pattern = "yyyy-MM-dd-HH-mm-ss-SSS";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        myTime = simpleDateFormat.format(new Date());
+        myTime = simpleDateFormat.format(Calendar.getInstance().getTime());
+        client.setup(myTime, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    coords = response.getJSONArray("calib_coors");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public void setButton() {
