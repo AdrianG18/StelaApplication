@@ -17,7 +17,7 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
     public AsyncHttpClient client;
 
 //    public static final String REST_URL= "http://127.0.0.1:5000/";
-    public static final String REST_URL="192.168.0.102:5123/";
+    public static final String REST_URL="http://192.168.0.102:5123/";
 
     public static final BaseApi REST_API_INSTANCE = null; // Change this
    // public static final String REST_URL = "https://api.twitter.com/1.1"; // Change this, base API URL
@@ -86,7 +86,7 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
      * Method to send first Configuration Point
      */
     public void setCalib(AsyncHttpResponseHandler handler) {
-        String apiUrl = REST_URL + "set_";
+        String apiUrl = REST_URL + "set_calib";
         client.post(apiUrl, handler);
     }
 

@@ -13,13 +13,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,24 +63,23 @@ public class ConfigureActivity extends AppCompatActivity {
 //        setButton();
 
         // get Time
-        String pattern = "yyyy-MM-dd-HH-mm-ss-SSS";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        myTime = simpleDateFormat.format(Calendar.getInstance().getTime());
-        client.setup(myTime, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    coords = response.getJSONArray("calib_coors");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        String pattern = "yyyy-MM-dd-HH-mm-ss-SSS";
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+//        myTime = simpleDateFormat.format(Calendar.getInstance().getTime());
+//        client.setup(myTime, new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                try {
+//                    coords = response.getJSONArray("calib_coors");
+//                    System.out.println(coords);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 //        // set the Button up
 //        setButton();
         complete();
-
-        client = new StelaClient(tempClient);
 
         
     }
