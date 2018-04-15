@@ -146,6 +146,7 @@ public class ConfigureActivity extends AppCompatActivity {
                     // on success
                     setCount++;
                     buttonPoint.setText("Finish");
+                    tvCoordinate.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
@@ -153,7 +154,6 @@ public class ConfigureActivity extends AppCompatActivity {
                     super.onFailure(statusCode, headers, responseString, throwable);
                 }
             });
-
         }
         else if (setCount == 3) {
 
