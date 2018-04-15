@@ -106,6 +106,7 @@ public class ConfigureActivity extends AppCompatActivity {
             // on success
             setCount++;
             buttonPoint.setText("Finish");
+            tvCoordinate.setVisibility(View.INVISIBLE);
         }
         else if (setCount == 3) {
             setCount = 0;
