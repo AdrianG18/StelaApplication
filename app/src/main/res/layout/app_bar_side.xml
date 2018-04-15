@@ -15,17 +15,19 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/background2"
+            android:background="@drawable/background3"
             app:popupTheme="@style/AppTheme.PopupOverlay" >
 
             <TextView
                 android:id="@+id/toolbar_title"
+                style="@style/header_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="STELA"
-                android:textColor="white"
-                style="@style/header_text"/>
+                android:textColor="@color/appTitle"
+                android:textStyle="bold"
+                android:fontFamily="roboto"/>
 
         </android.support.v7.widget.Toolbar>
 

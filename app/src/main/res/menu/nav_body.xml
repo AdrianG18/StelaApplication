@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_nav"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -8,19 +9,20 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_24dp"
+            android:iconTint="@color/redText"
             android:title="Home" />
         <item
             android:id="@+id/nav_configure"
-            android:icon="@drawable/ic_add_to_photos_black_24dp"
-            android:title="Add a Recipe" />
+            android:icon="@drawable/ic_check_circle_black_24dp"
+            android:title="Calibration" />
         <item
             android:id="@+id/nav_search"
             android:icon="@drawable/ic_search"
             android:title="Search" />
         <item
             android:id="@+id/nav_move"
-            android:icon="@drawable/ic_friends"
-            android:title="Find Friends" />
+            android:icon="@drawable/ic_gps_not_fixed_black_24dp"
+            android:title="Manually Move" />
         <item
             android:id="@+id/nav_help"
             android:icon="@drawable/ic_help"

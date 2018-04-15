@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/night"
     tools:context="com.example.adrian.stelaapplication.MoveActivity">
 
     <EditText
@@ -16,6 +17,9 @@
         android:layout_marginTop="147dp"
         android:ems="10"
         android:hint="x Value"
+        android:textColorHint="@color/buttonGrey"
+        android:textColor="@color/redText"
+        android:backgroundTint="@color/buttonGrey"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,6 +35,9 @@
         android:layout_marginStart="84dp"
         android:ems="10"
         android:hint="y Value"
+        android:textColorHint="@color/buttonGrey"
+        android:textColor="@color/redText"
+        android:backgroundTint="@color/buttonGrey"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +54,7 @@
         android:layout_marginTop="41dp"
         android:text="Move"
         android:onClick="onMove"
+        android:backgroundTint="@color/buttonGrey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

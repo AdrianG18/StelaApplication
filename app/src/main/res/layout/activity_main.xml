@@ -14,7 +14,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/night">
 
         <include
             layout="@layout/app_bar_side"
@@ -36,6 +37,8 @@
         android:layout_gravity="start"
         android:background="@drawable/background"
         android:fitsSystemWindows="true"
+        app:itemTextColor="@color/appTitle"
+        app:itemIconTint="@color/appSubtitle"
         app:menu="@menu/nav_body" />
     <!--app:headerLayout="@layout/nav_header_side"-->
 
