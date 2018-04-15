@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -18,6 +21,7 @@ import butterknife.ButterKnife;
 public class ConfigureActivity extends AppCompatActivity {
 
     public boolean clicked = false;
+    public String myTime;
 
     @BindView(R.id.button_configure) Button buttonConfigure;
     @BindView(R.id.linear_layout) LinearLayout linearLayout;
@@ -32,6 +36,11 @@ public class ConfigureActivity extends AppCompatActivity {
 
         // set the Button up
         setButton();
+
+        // get Time
+        String pattern = "yyyy-MM-dd-HH-mm-ss-SSS";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        myTime = simpleDateFormat.format(new Date());
     }
 
     public void setButton() {
