@@ -60,7 +60,7 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
      * Method to send a movement request to the Stela Server
      */
     public void sendMovement(double[] coords, AsyncHttpResponseHandler handler) {
-        String apiUrl = REST_URL + "coordinates";
+        String apiUrl = REST_URL + "/coordinates";
 
         RequestParams params = new RequestParams();
         params.put("pandrews", coords);
@@ -81,4 +81,14 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
         client.get(apiUrl, params, handler);
 
     }
+
+    /**
+     * Method to send first Configuration Point
+     */
+    public void postCoordinate1(AsyncHttpResponseHandler handler) {
+        String apiUrl = REST_URL + "/setup";
+
+        client.post(apiUrl,handler);
+    }
+
 }
