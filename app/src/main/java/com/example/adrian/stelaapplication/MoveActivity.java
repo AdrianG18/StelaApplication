@@ -46,6 +46,8 @@ public class MoveActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         client = new StelaClient(tempClient);
+        // this doesnt work for now
+      //  client = StelaClient.getClient();
     }
 
 //    public boolean verifyMove(View v) {
@@ -84,7 +86,7 @@ public class MoveActivity extends AppCompatActivity {
     }
 
 
-    public void onMoooooove(View v) {
+    public void onMove(View v) {
         // get the coordinates from the number values they input
         String s1 = xText.getText().toString();
         String s2 = yText.getText().toString();
@@ -98,6 +100,7 @@ public class MoveActivity extends AppCompatActivity {
         if (s2.isEmpty()) {
             // print some error message popup thing
             Log.d("Null Pointer", "Y-Coordinate must have a value");
+            errorPopup();
             return;
         }
 
@@ -138,7 +141,7 @@ public class MoveActivity extends AppCompatActivity {
 
     }
 
-    public void onMove(View v) {
+    public void onMooooooove(View v) {
         client.getCoordinates(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

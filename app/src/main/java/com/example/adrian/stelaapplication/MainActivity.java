@@ -13,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.loopj.android.http.AsyncHttpClient;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,6 +43,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ConstellationAdapter.ConstellationAdapterListener constellationAdapterListener;
     private int position;
 //    RecyclerView rvConstellation;
+
+
+    // Set the Client hopefully to use for the whole class
+    AsyncHttpClient tempClient = new AsyncHttpClient();
+    StelaClient client = new StelaClient(tempClient);
 
 
     @Override
@@ -148,6 +155,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    /**
+     * Call this method to set client if the logic before onCreate doesnt work
+     */
+    public void setClient() {
+        client = new StelaClient(tempClient);
+    }
+
 //    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
 //        menuInflater.inflate(R.menu.nav_body, menu);
 //        super.onCreateOptionsMenu(menu);
@@ -213,6 +227,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_move:
                 // Go to MoveActivity
                 startActivity(new Intent(getApplicationContext(), MoveActivity.class));
+                // set the transition
+                overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
+            case R.id.nav_help:
+                // Go to the MoveContActivity
+                startActivity(new Intent(getApplicationContext(), MoveContActivity.class));;
                 // set the transition
                 overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
             default:

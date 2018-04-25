@@ -1,9 +1,11 @@
 package com.example.adrian.stelaapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -13,7 +15,11 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +40,18 @@ public class ConfigureActivity extends AppCompatActivity {
     public boolean clicked = false;
     public String myTime;
     public JSONArray coords;
+    public JSONArray coords1;
+    public JSONArray coords2;
+    public JSONArray coords3;
+
+    double c11;
+    double c12;
+
+    double c21;
+    double c22;
+
+    double c31;
+    double c32;
 
 
 
@@ -63,21 +81,56 @@ public class ConfigureActivity extends AppCompatActivity {
 //        setButton();
 
         // get Time
-//        String pattern = "yyyy-MM-dd-HH-mm-ss-SSS";
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-//        myTime = simpleDateFormat.format(Calendar.getInstance().getTime());
-//        client.setup(myTime, new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                try {
-//                    coords = response.getJSONArray("calib_coors");
+        String pattern = "yyyy-MM-dd-HH-mm-ss-SSS";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        myTime = simpleDateFormat.format(Calendar.getInstance().getTime());
+
+//        JSONObject timeJSON = new JSONObject();
+//        try {
+//            timeJSON.put("time", myTime);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        //  System.out.println("TIME!!!!!!!!!!!!!! " + myTime);
+        Context context = getApplicationContext();
+        client.setup(myTime, context, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    coords1 = response.getJSONArray("coor1");
+                    coords2 = response.getJSONArray("coor2");
+                    coords3 = response.getJSONArray("coor3");
+
+                    c11 = coords1.getDouble(0);
+                    c12 = coords1.getDouble(1);
+
+                    c21 = coords2.getDouble(0);
+                    c22 = coords2.getDouble(1);
+
+                    c31 = coords3.getDouble(0);
+                    c32 = coords3.getDouble(1);
+
+                    System.out.println("c11: " + c11);
+                    System.out.println("c12: " + c12);
+                    System.out.println("c21: " + c21);
+                    System.out.println("c22: " + c22);
+                    System.out.println("c21: " + c31);
+                    System.out.println("c32: " + c32);
+
+
 //                    System.out.println(coords);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//        // set the Button up
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.d("setup", "Failed setup time");
+                super.onFailure(statusCode, headers, responseString, throwable);
+            }
+        });
+        // set the Button up
 //        setButton();
         complete();
 
@@ -244,10 +297,10 @@ public class ConfigureActivity extends AppCompatActivity {
         // move down
     }
 
-    @Override
-    public void onBackPressed() {
-        if (complete) {
-            super.onBackPressed();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if (complete) {
+//            super.onBackPressed();
+//        }
+//    }
 }

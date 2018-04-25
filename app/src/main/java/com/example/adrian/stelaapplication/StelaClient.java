@@ -1,10 +1,19 @@
 package com.example.adrian.stelaapplication;
 
 
+import android.content.Context;
+
 import com.github.scribejava.core.builder.api.BaseApi;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+
+import cz.msebera.android.httpclient.entity.StringEntity;
 
 
 /**
@@ -17,7 +26,7 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
     public AsyncHttpClient client;
 
 //    public static final String REST_URL= "http://127.0.0.1:5000/";
-    public static final String REST_URL="http://192.168.0.102:5123/";
+    public static final String REST_URL="http://192.168.0.100:5123/";
 
     public static final BaseApi REST_API_INSTANCE = null; // Change this
    // public static final String REST_URL = "https://api.twitter.com/1.1"; // Change this, base API URL
@@ -56,17 +65,24 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
         this.client = client;
     }
 
+
+    /**
+     * Method to send a movement request to the Stela Server
+     */
+    public StelaClient getClient() {
+        return this;
+    }
+
     /**
      * Method to send a movement request to the Stela Server
      */
     public void sendMovement(double[] coords, AsyncHttpResponseHandler handler) {
-        String apiUrl = REST_URL + "coordinates";
+        String apiUrl = REST_URL + "move";
 
         RequestParams params = new RequestParams();
-        params.put("pandrews", coords);
+        params.put("increment", coords);
         System.out.println(apiUrl);
         client.post(apiUrl, params, handler);
-
     }
 
     /**
@@ -79,7 +95,6 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
 //        params.put("pandrews", coords);
         System.out.println(apiUrl);
         client.get(apiUrl, params, handler);
-
     }
 
     /**
@@ -93,14 +108,33 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
     /**
      * Method to begin Calibration Setup
      */
-    public void setup(String time, AsyncHttpResponseHandler handler) {
+    public void setup(String time, Context context, AsyncHttpResponseHandler handler) {
         String apiUrl = REST_URL + "setup";
 
-        RequestParams params = new RequestParams();
-        params.put("time", time);
-        System.out.println(time);
+//        RequestParams params = new RequestParams();
+//        params.put("time", time);
+//
+//        System.out.println(time);
+//
+//        client.post(apiUrl, params, handler);
 
-        client.post(apiUrl, params, handler);
+
+        JSONObject jsonParams = new JSONObject();
+        try {
+            jsonParams.put("time", time);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        StringEntity entity = null;
+
+        try {
+            entity = new StringEntity(jsonParams.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        client.post(context, apiUrl, entity, "application/json", handler);
     }
 
     /**
@@ -109,6 +143,11 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
     public void finishCalib(AsyncHttpResponseHandler handler) {
         String apiUrl = REST_URL + "calibrate";
         client.post(apiUrl, handler);
+    }
+
+    public void getPosition(AsyncHttpResponseHandler handler) {
+        String apiUrl = REST_URL + "get_pos";
+        client.get(apiUrl, null, handler);
     }
 
 }
