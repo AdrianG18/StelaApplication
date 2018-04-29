@@ -112,7 +112,7 @@ public class MoveActivity extends AppCompatActivity {
             return;
         }
 
-        double[] coords = new double[]{x, y};
+        Double[] coords = new Double[]{x, y};
 
         System.out.println("X: " + coords[0]);
         System.out.println("Y: " + coords[1]);
@@ -121,7 +121,7 @@ public class MoveActivity extends AppCompatActivity {
             System.out.println("THE CLIENT IS NULL");
         }
 
-        client.sendMovement(coords, new JsonHttpResponseHandler() {
+        client.sendMovement(coords, getApplicationContext(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);

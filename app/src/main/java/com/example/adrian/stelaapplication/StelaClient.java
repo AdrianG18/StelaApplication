@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 import cz.msebera.android.httpclient.entity.StringEntity;
 
@@ -63,6 +64,7 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
 
     public StelaClient(AsyncHttpClient client) {
         this.client = client;
+//        client.setTimeout(60000);
     }
 
 
@@ -76,13 +78,38 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
     /**
      * Method to send a movement request to the Stela Server
      */
-    public void sendMovement(double[] coords, AsyncHttpResponseHandler handler) {
+    public void sendMovement(Double[] coords, Context context, AsyncHttpResponseHandler handler) {
         String apiUrl = REST_URL + "move";
+        System.out.println("COORDS: " + Arrays.toString(coords));
 
-        RequestParams params = new RequestParams();
-        params.put("increment", coords);
-        System.out.println(apiUrl);
-        client.post(apiUrl, params, handler);
+//        RequestParams params = new RequestParams();
+//        params.put("increment", coords);
+//        System.out.println(apiUrl);
+//        client.post(apiUrl, params, handler);
+
+        JSONObject jsonParams = new JSONObject();
+//        try {
+//            JSONArray jsonArray = new JSONArray(coords);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+
+        try {
+            jsonParams.put("increment", Arrays.toString(coords));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        StringEntity entity = null;
+
+        try {
+            entity = new StringEntity(jsonParams.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        System.out.println("STRING ENTITY: " + entity.toString());
+
+        client.post(context, apiUrl, entity, "application/json", handler);
     }
 
     /**
@@ -118,6 +145,7 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
 //
 //        client.post(apiUrl, params, handler);
 
+        client.setTimeout(60000);
 
         JSONObject jsonParams = new JSONObject();
         try {
