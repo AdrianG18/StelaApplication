@@ -1,7 +1,6 @@
 package com.example.adrian.stelaapplication;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -124,11 +123,12 @@ public class MoveActivity extends AppCompatActivity {
         client.sendMovement(coords, getApplicationContext(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                // Go back to the Main activity
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                // set the transition
-                overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+//                super.onSuccess(statusCode, headers, response);
+//                // Go back to the Main activity
+//                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                // set the transition
+//                overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+
             }
 
             @Override

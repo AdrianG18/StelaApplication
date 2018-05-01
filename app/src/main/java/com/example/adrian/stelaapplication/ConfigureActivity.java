@@ -3,6 +3,7 @@ package com.example.adrian.stelaapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -74,6 +75,11 @@ public class ConfigureActivity extends AppCompatActivity {
             super.onFailure(statusCode, headers, responseString, throwable);
         }
     };
+
+
+    Handler timer = new Handler();
+    int delay = 1000*5; //milliseconds = 5 seconds
+    Runnable runnable;
 
 
 //    public boolean clicked = false;
@@ -155,7 +161,39 @@ public class ConfigureActivity extends AppCompatActivity {
 //        setButton();
         complete();
 
+//        handler.postDelayed(new Runnable(){
+//            public void run(){
+//                //do something
+//                handler.postDelayed(this, delay);
+//            }
+//        }, delay);
+
         
+    }
+
+
+    @Override
+    protected void onResume() {
+        //start handler as activity become visible
+
+        timer.postDelayed(new Runnable() {
+            public void run() {
+                //do something
+                getPosition();
+
+                runnable=this;
+
+                timer.postDelayed(runnable, delay);
+            }
+        }, delay);
+
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        timer.removeCallbacks(runnable); //stop handler when activity not visible
+        super.onPause();
     }
 
 //    public void setButton() {
@@ -190,6 +228,14 @@ public class ConfigureActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     // on success
+                    String responseString = null;
+                    try {
+                        responseString = response.getString("response");
+                        System.out.println("First Point Set: " + responseString);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                     setCount++;
                     buttonPoint.setText("Set Second Point");
                     tvCoordinate.setText("Coordinate 2");
@@ -215,8 +261,16 @@ public class ConfigureActivity extends AppCompatActivity {
             // server request
             client.setCalib(new JsonHttpResponseHandler() {
                 @Override
-                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     // on success
+                    String responseString = null;
+                    try {
+                        responseString = response.getString("response");
+                        System.out.println("Second Point Set: " + responseString);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                     setCount++;
                     buttonPoint.setText("Set Third Point");
                     tvCoordinate.setText("Coordinate 3");
@@ -241,8 +295,16 @@ public class ConfigureActivity extends AppCompatActivity {
             // server request
             client.setCalib(new JsonHttpResponseHandler() {
                 @Override
-                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     // on success
+                    String responseString = null;
+                    try {
+                        responseString = response.getString("response");
+                        System.out.println("Third Point Set: " + responseString);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                     setCount++;
                     buttonPoint.setText("Finish");
                     tvCoordinate.setVisibility(View.INVISIBLE);
@@ -255,13 +317,21 @@ public class ConfigureActivity extends AppCompatActivity {
             });
         }
         else if (setCount == 3) {
-
-
+            // Call to finish
             client.finishCalib(new JsonHttpResponseHandler() {
                 @Override
-                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     setCount = 0;
                     complete = true;
+
+                    String responseString = null;
+                    try {
+                        responseString = response.getString("response");
+                        System.out.println("Finish Calibrate: " + responseString);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
 
                     // make an intent to go back to main Activity
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
@@ -289,27 +359,7 @@ public class ConfigureActivity extends AppCompatActivity {
         coords[0] = 0.0;
         coords[1] = 5.0;
         System.out.println("DOUBLE COORDS: " + Arrays.toString(coords));
-        client.sendMovement(coords, getApplicationContext(), handler1); /*new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                System.out.println("Object");
-                System.out.println(response.toString());
-                String responseString = null;
-                try {
-                    responseString = response.getString("response");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(responseString);
-                getPosition();
-            }
-
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-            }
-        }); */
+        client.sendMovement(coords, getApplicationContext(), handler1);
     }
 
     public void left(View view) {
@@ -317,26 +367,7 @@ public class ConfigureActivity extends AppCompatActivity {
         // move up
         Double [] coords = {-5.0,0.0};
         System.out.println("DOUBLE COORDS: " + Arrays.toString(coords));
-        client.sendMovement(coords, getApplicationContext(), handler1); /* new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                System.out.println("Object");
-                System.out.println(response.toString());
-                String responseString = null;
-                try {
-                    responseString = response.getString("response");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(responseString);
-                getPosition();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-            }
-        }); */
+        client.sendMovement(coords, getApplicationContext(), handler1);
     }
 
     public void right(View view) {
@@ -344,26 +375,7 @@ public class ConfigureActivity extends AppCompatActivity {
         // move up
         Double [] coords = {5.0,0.0};
         System.out.println("DOUBLE COORDS: " + Arrays.toString(coords));
-        client.sendMovement(coords, getApplicationContext(), handler1); /*new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                System.out.println("Object");
-                System.out.println(response.toString());
-                String responseString = null;
-                try {
-                    responseString = response.getString("response");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(responseString);
-                getPosition();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-            }
-        }); */
+        client.sendMovement(coords, getApplicationContext(), handler1);
     }
 
     public void down(View view) {
@@ -371,26 +383,7 @@ public class ConfigureActivity extends AppCompatActivity {
         // move up
         Double [] coords = {0.0,-5.0};
         System.out.println("DOUBLE COORDS: " + Arrays.toString(coords));
-        client.sendMovement(coords, getApplicationContext(), handler1); /*new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                System.out.println("Object");
-                System.out.println(response.toString());
-                String responseString = null;
-                try {
-                    responseString = response.getString("response");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(responseString);
-                getPosition();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-            }
-        }); */
+        client.sendMovement(coords, getApplicationContext(), handler1);
     }
 
 //    @Override

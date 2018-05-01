@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-        configure();
+        //configure();
 
     }
 
@@ -229,11 +229,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(getApplicationContext(), MoveActivity.class));
                 // set the transition
                 overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
             case R.id.nav_help:
                 // Go to the MoveContActivity
-                startActivity(new Intent(getApplicationContext(), MoveContActivity.class));;
+                startActivity(new Intent(getApplicationContext(), MoveContActivity.class));
                 // set the transition
                 overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
             default:
                 // close the navigation view
                 drawerLayout.closeDrawer(GravityCompat.START);
