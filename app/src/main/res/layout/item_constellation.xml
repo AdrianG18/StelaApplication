@@ -22,7 +22,7 @@
         android:layout_alignTop="@+id/ivImage"
         android:layout_toEndOf="@+id/ivImage"
         android:text="Constellation Name"
-        android:textColor="@color/redText"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp" />
 
     <TextView
@@ -32,5 +32,5 @@
         android:layout_below="@+id/tvName"
         android:layout_toEndOf="@+id/ivImage"
         android:text="Short Description or Fact"
-        android:textColor="@color/redText"/>
+        android:textColor="@color/colorAccent"/>
 </RelativeLayout>

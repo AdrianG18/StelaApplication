@@ -238,6 +238,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
+            case R.id.nav_search:
+                // Go to the MoveContActivity
+                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                // set the transition
+                overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
             default:
                 // close the navigation view
                 drawerLayout.closeDrawer(GravityCompat.START);

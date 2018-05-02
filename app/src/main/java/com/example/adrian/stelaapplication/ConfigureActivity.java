@@ -57,6 +57,10 @@ public class ConfigureActivity extends AppCompatActivity {
     double current1;
     double current2;
 
+    Double alt = 10.0;
+    Double azi = 56.78;
+
+
     JsonHttpResponseHandler handler1 = new JsonHttpResponseHandler() {
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -93,6 +97,8 @@ public class ConfigureActivity extends AppCompatActivity {
     @BindView(R.id.button_down) Button buttonDown;
     @BindView(R.id.linear_layout) LinearLayout linearLayout;
     @BindView(R.id.tv_Coordinate) TextView tvCoordinate;
+    @BindView(R.id.tv_alt) TextView tvAlt;
+    @BindView(R.id.tv_azi) TextView tvAzi;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -213,6 +219,9 @@ public class ConfigureActivity extends AppCompatActivity {
         if (b != null) {
             complete = b.getBoolean("complete");
         }
+
+        tvAlt.setText("Alt: " + alt.toString());
+        tvAzi.setText("Azi: " + azi.toString());
     }
 
     public void setPoint(View view) {
@@ -404,6 +413,12 @@ public class ConfigureActivity extends AppCompatActivity {
                     current2 = position.getDouble(1);
                     System.out.println("Current1: " + current1);
                     System.out.println("Current2: " + current2);
+                    alt = current1;
+                    azi = current2;
+                    System.out.println("alt: " + alt);
+                    System.out.println("azi: " + azi);
+                    tvAlt.setText("Alt: " + alt.toString());
+                    tvAzi.setText("Azimuth: " + azi.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

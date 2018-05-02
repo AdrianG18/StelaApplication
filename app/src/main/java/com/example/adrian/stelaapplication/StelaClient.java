@@ -174,9 +174,36 @@ public class StelaClient extends AsyncHttpClient /* OAuthBaseClient  */ {
         client.post(apiUrl, handler);
     }
 
+    /**
+     * Method to get the current position of the telescope
+     * @param handler
+     */
     public void getPosition(AsyncHttpResponseHandler handler) {
         String apiUrl = REST_URL + "get_pos";
         client.get(apiUrl, null, handler);
+    }
+
+
+    public void search(String star, Context context, AsyncHttpResponseHandler handler) {
+        String apiUrl = REST_URL + "search";
+
+        JSONObject jsonParams = new JSONObject();
+        try {
+            jsonParams.put("string", star);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        StringEntity entity = null;
+
+        try {
+            entity = new StringEntity(jsonParams.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        client.post(context, apiUrl, entity, "application/json", handler);
+
     }
 
 }

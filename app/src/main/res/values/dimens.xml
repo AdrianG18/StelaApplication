@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="title_text_size">18sp</dimen>
+    <dimen name="alt_azi_gap">100dp</dimen>
     <dimen name="udl_udr_gap">90dp</dimen>
     <dimen name="left_right_gap">180dp</dimen>
     <dimen name="move_top_margin">50dp</dimen>
@@ -8,5 +9,6 @@
     <dimen name="coord_separation">50dp</dimen>
     <dimen name="level_margin">15dp</dimen>
     <dimen name="up_down_shift_margin">-20dp</dimen>
+    <dimen name="search_box_width">150dp</dimen>
 
 </resources>

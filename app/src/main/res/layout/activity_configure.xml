@@ -9,6 +9,32 @@
     android:id="@+id/linear_layout">
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_alt"
+            android:textSize="@dimen/title_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:layout_marginRight="@dimen/alt_azi_gap"
+            android:text="Alt"/>
+
+        <TextView
+            android:id="@+id/tv_azi"
+            android:textSize="@dimen/title_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:text="Azimuth"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:orientation="vertical"
@@ -20,7 +46,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/buttonGrey"
             android:text="COORDINATE 1"
-            android:textColor="@color/redText"
+            android:textColor="@color/colorAccent"
             android:textColorHint="@color/buttonGrey"
             android:textStyle="bold" />
 
@@ -30,7 +56,7 @@
             android:layout_height="wrap_content"
             android:onClick="setPoint"
             android:backgroundTint="@color/buttonGrey"
-            android:textColor="@color/redText"
+            android:textColor="@color/colorAccent"
             android:text="Set First Point" />
 
     </LinearLayout>
@@ -45,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/buttonGrey"
-            android:textColor="@color/redText"
+            android:textColor="@color/colorAccent"
             android:onClick="up"
             android:text="Up" />
 
@@ -61,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/buttonGrey"
-            android:textColor="@color/redText"
+            android:textColor="@color/colorAccent"
             android:onClick="left"
             android:text="Left" />
 
@@ -71,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
             android:backgroundTint="@color/buttonGrey"
-            android:textColor="@color/redText"
+            android:textColor="@color/colorAccent"
             android:onClick="right"
             android:text="Right" />
 
@@ -88,7 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/buttonGrey"
-            android:textColor="@color/redText"
+            android:textColor="@color/colorAccent"
             android:onClick="down"
             android:text="Down" />
 

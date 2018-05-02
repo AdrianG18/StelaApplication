@@ -13,7 +13,8 @@
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#090C0A</color>
-    <color name="colorAccent">#CD0000</color>
+    <color name="colorAccentRed">#CD0000</color>
+    <color name="colorAccent">#E0E0E0</color>
     <color name="colorAccentOld">#FF4081</color>
     <color name="gradient_start1">#CD0000</color>
     <color name="gradient_end1">#AF0000</color>
@@ -25,4 +26,5 @@
     <color name="night">#090C0A</color>
     <color name="redText">#CD0000</color>
     <color name="buttonGrey">#303030</color>
+    <color name="startGradientGray">#808080</color>
 </resources>

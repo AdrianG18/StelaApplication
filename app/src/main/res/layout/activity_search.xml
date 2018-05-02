@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/night"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context="com.example.adrian.stelaapplication.SearchActivity">
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="@dimen/search_box_width"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/buttonGrey"
+        android:textColor="@color/colorAccent"
+        android:hint="Search" />
+
+    <ImageButton
+        android:id="@+id/ib_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:tint="@color/colorAccent"
+        android:contentDescription="Search Button"
+        android:onClick="onSearch"
+        app:srcCompat="@drawable/ic_search" />
+
+
+
+</LinearLayout>
